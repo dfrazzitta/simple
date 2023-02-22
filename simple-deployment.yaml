@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: simple
+  name: simple
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: simple
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: simple
+    spec:
+      containers:
+      - image: simple
+        imagePullPolicy: ""
+        name: simple
+        ports:
+        - containerPort: 443
+        resources: {}
+        volumeMounts:
+        - mountPath: /data/simple
+          name: simple-data-container
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: simple-data-container
+        persistentVolumeClaim:
+          claimName: simple-data-container
+status: {}

@@ -1,0 +1,107 @@
+sdasdas
+
+
+            //var client = new MongoClient(connectionString);
+
+
+            /*
+            Client = new MongoClient("mongodb://dave:tvxs721#3@mongodb-replica-0:27017,dave:tvxs721#3@mongodb://mongodb-replica-1:27017/?replicaSet=rs0");
+            _logger.Log(LogLevel.Information, "after the client");
+            _logger.Log(LogLevel.Information, Client.Settings.ReplicaSetName);
+            var rs = Client.Settings.ReplicaSetName;
+
+            var databases = await Client.ListDatabasesAsync();
+            StringBuilder sb = new StringBuilder();
+
+            while (databases.MoveNext())
+            {
+                var currentBatch = databases.Current;
+
+                foreach (BsonDocument s in currentBatch)
+                    sb.Append(s.ToString() + "   ");
+
+            }
+            ViewData["goodcall"] = sb.ToString(); //.AddressList[0];
+            ViewData["rsname"] = rs;
+            */
+
+
+
+             
+            //Client = new MongoClient("mongodb+srv://admin:Frazz1234@mdb0-svc.mongodb.svc.cluster.local/admin?replicaSet=mdb0&ssl=false");
+
+            // Client = new MongoClient("mongodb://192.168.1.102"); mongodb-container
+
+             
+
+            //Client = new MongoClient("mongodb://root:rootpassword@192.168.1.169:27017");
+
+
+            //Client = new MongoClient("mongodb://admin:Frazz1234@mdb0-0.mdb0-svc.mongodb.svc.cluster.local:27017,mdb0-1.mdb0-svc.mongodb.svc.cluster.local:27017,mdb0-2.mdb0-svc.mongodb.svc.cluster.local:27017/admin?replicaSet=mdb0&ssl=false");
+
+
+            var databases1 = await Client.ListDatabasesAsync();
+            _logger.Log(LogLevel.Information, "After ListDatabase");
+            // iterate databases
+            // Throws System.ObjectDisposedException: 'Cannot access a disposed object if ToList() or .Any() has been used
+            // databases.ToList() returns a list containing all the documents returned by a cursor
+            // databases.Any() determines whether the cursor contains any documents
+            StringBuilder sb1 = new StringBuilder();
+            bool isOK = false;
+            while (databases1.MoveNext())
+            {
+                var currentBatch = databases1.Current;
+                //Utils.Log(currentBatch.AsEnumerable(), "List databases");
+                foreach (BsonDocument s in currentBatch)
+                {
+                    isOK = true;
+                    sb1.Append(s.ToString());
+                    _logger.Log(LogLevel.Information, sb1.ToString());
+                }
+
+
+            }
+            ViewData["goodcall"] = sb1.ToString();
+
+            if (isOK)
+            {
+                _logger.Log(LogLevel.Information, "DID   FIND DB");
+                ViewData["goodcall"] = "found   Data";
+                ViewData["rsname"] = sb1.ToString();
+            }
+            else
+            {
+                _logger.Log(LogLevel.Information, "DID NO FIND DB");
+                ViewData["goodcall"] = "found NO Data";
+                ViewData["rsname"] = "squat";
+            }
+            /*
+            System.Net.IPAddress[] ipAddresses = Dns.GetHostAddresses("mongo.mongo.svc.cluster.local");
+            StringBuilder sb = new StringBuilder();
+
+            foreach (IPAddress i in ipAddresses)
+            {
+                sb.Append("mongodb://" + i.ToString() + ":27017");
+                sb.Append(",");
+                _logger.Log(LogLevel.Information, sb.ToString());
+            }
+            sb.Remove(sb.Length - 1, 1);
+            _logger.Log(LogLevel.Information, sb.ToString());
+            sb.Append("/?replicaSet=rs0");
+            _logger.Log(LogLevel.Information, sb.ToString());
+
+            ViewData["rsname"] = sb.ToString();
+            */
+            //Client = new MongoClient("mongodb://root:rootpassword@mongodb-container.default.svc.cluster.local:27017");
+            //Client = new MongoClient("mongodb://root:rootpassword@192.168.1.245:27017");
+
+            //Client = new MongoClient("mongodb://admin:Frazz1234@mdb0-0.mdb0-svc.mongodb.svc.cluster.local:27017,mdb0-1.mdb0-svc.mongodb.svc.cluster.local:27017,mdb0-2.mdb0-svc.mongodb.svc.cluster.local:27017/admin?replicaSet=mdb0&ssl=false");
+
+
+            //            var bsonPersonsCollection = database.GetCollection<BsonDocument>(Constants.UsersCollection);
+            // var typedUser1 = RandomData.GenerateUsers(10, "en"); //.ToList<User>(); //.First();
+
+            // iterate databases
+            // Throws System.ObjectDisposedException: 'Cannot access a disposed object if ToList() or .Any() has been used
+            // databases.ToList() returns a list containing all the documents returned by a cursor
+            // databases.Any() determines whether the cursor contains any documents        

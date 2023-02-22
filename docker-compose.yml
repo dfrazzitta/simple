@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  simple:
+    image: ${DOCKER_REGISTRY-}simple
+    build:
+      context: .
+      dockerfile: Simple/Dockerfile
+    ports:
+      - 443:443
+    volumes:
+      - simple_data_container:/data/simple
+
+  mongodb_container:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:
+  simple_data_container:

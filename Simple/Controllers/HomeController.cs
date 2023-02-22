@@ -9,6 +9,9 @@ using System.Text;
 
 namespace Simple.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
